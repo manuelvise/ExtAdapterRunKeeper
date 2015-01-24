@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 //Service Implementation
 
-@WebService(endpointInterface = "introsde.adapter.ws.ExtAdapterRunkeeper", serviceName = "AdapterRunkeeperService")
+@WebService(endpointInterface = "introsde.adapter.ws.AdapterRunkeeper", serviceName = "AdapterRunkeeperService")
 public class AdapterRunkeeperImpl implements AdapterRunkeeper {
 
 	@Override
