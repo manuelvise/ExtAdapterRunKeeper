@@ -27,9 +27,7 @@ public interface AdapterRunkeeper {
     @WebResult(name="weight") 
     public Weights getWeight(@WebParam(name="accessToken") String accessToken);
 	
-	@WebMethod(operationName="getUserId")
-    @WebResult(name="userId") 
-    public Long getUserId(@WebParam(name="accessToken") String accessToken);
+
 	
 	@WebMethod(operationName="getUser")
     @WebResult(name="user") 

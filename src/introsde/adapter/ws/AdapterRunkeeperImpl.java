@@ -56,18 +56,7 @@ public class AdapterRunkeeperImpl implements AdapterRunkeeper {
 		return null;
 	}
 
-	@Override
-	public Long getUserId(String accessToken) {
-		HttpGetRequestRK activitiesRequest = new HttpGetRequestRK(
-				RunKConstants.REST_URL, "user", accessToken,
-				RunKConstants.MEDIA_USER);
-		String responseFromRunkeeper = activitiesRequest.getResponse();
-
-		Long userId = null;
-		JSONObject jsonToken = new JSONObject(responseFromRunkeeper);
-		userId = (Long) jsonToken.get("userID");
-		return userId;
-	}
+	
 
 	@Override
 	public Profile getUser(String accessToken) {
