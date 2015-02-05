@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import sun.net.www.http.HttpClient;
+
 public class HttpGetRequestRK {
 
 	private String host;
@@ -24,29 +26,39 @@ public class HttpGetRequestRK {
 	public String getResponse() {
 
 		String output = null;
+		String strResponse = null;
 
 		try {
-
-			URL url = new URL(host + "/" + query);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", accept);
-			conn.setRequestProperty("Authorization", "Bearer " + token);
-
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ conn.getResponseCode());
+			String url = host + "/" + query;
+			 
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+	 
+			// optional default is GET
+			con.setRequestMethod("GET");
+			
+			con.addRequestProperty("Authorization", "Bearer "+token);
+			con.addRequestProperty("Accept", accept);
+			
+			
+			int responseCode = con.getResponseCode();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("Response Code : " + responseCode);
+	 
+			BufferedReader in = new BufferedReader(
+			        new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+	 
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
 			}
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					(conn.getInputStream())));
-
-			System.out.println("Output from Server .... \n");
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
-			}
-
-			conn.disconnect();
+			in.close();
+	 
+			//print result
+			System.out.println(response.toString());
+			strResponse = response.toString();
+			
 
 		} catch (MalformedURLException e) {
 
@@ -57,7 +69,7 @@ public class HttpGetRequestRK {
 			e.printStackTrace();
 
 		}
-		return output;
+		return strResponse;
 
 	}
 

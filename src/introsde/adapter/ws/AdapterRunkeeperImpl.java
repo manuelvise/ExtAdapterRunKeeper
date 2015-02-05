@@ -67,7 +67,8 @@ public class AdapterRunkeeperImpl implements AdapterRunkeeper {
 
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			return mapper.readValue(responseFromRunkeeper, Profile.class);
+			Profile pr = mapper.readValue(responseFromRunkeeper, Profile.class);
+			return pr;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
